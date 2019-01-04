@@ -1,0 +1,13 @@
+require './main.rb'
+require 'minitest/autorun'
+
+# Test class
+class Test < MiniTest::Unit::TestCase
+  def test_1
+    assert_in_delta(0.6931471, count(-2), 1e-2)
+  end
+
+  def test_2
+    assert_in_delta(0.6931471, count(-4), 1e-4)
+  end
+end
