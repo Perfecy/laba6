@@ -5,7 +5,7 @@ def enumerator
     (1..Float::INFINITY).lazy.each do |k|
       yielder.yield sum, prev
       prev = sum
-      sum += ((-1)**(k.to_f-1) / (k.to_f ))
+      sum += ((-1)**(k.to_f - 1) / k.to_f)
     end
   end
 end
