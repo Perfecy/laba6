@@ -1,24 +1,23 @@
-def trap(a, b, accur)
-  part = (b - a) / accur
-  (
-    (yield(a) + yield(b)) / 2.0 +
-     Array.new(accur - 1) { |index| yield(a + part * index) }.inject(0) { |result, elem| result + elem }
-  ) * part
-end
+def my_func(a, b, ac, fun = nil)
+  part = (b - a) / ac
 
-def my_func(a, b, accur, function = nil)
+  if block_given?
 
-  part = (b - a) / accur
+    ((yield(a) + yield(b)) / 2.0 +
+        Array.new(ac - 1) do |index|
+          yield(a + part *
+           index)
+        end .inject(0) { |result, elem| result + elem }
+    ) * part
 
-   if block_given?
-      t=((yield(a) + yield(b)) / 2.0 +
-       Array.new(accur - 1) { |index| yield(a + part * index) }.inject(0) { |result, elem| result + elem }
-         ) * part
-    else
+  else
 
-      t=((function.call(a) + function.call(b)) / 2.0 +
-       Array.new(accur - 1) { |index| function.call(a + part * index) }.inject(0) { |result, elem| result + elem }
-         ) * part
-    end
+    ((fun.call(a) + fun.call(b)) / 2.0 +
+     Array.new(ac - 1) do |index|
+       fun.call(a + part *
+          index)
+     end .inject(0) { |result, elem| result + elem }
+    ) * part
 
+  end
 end
